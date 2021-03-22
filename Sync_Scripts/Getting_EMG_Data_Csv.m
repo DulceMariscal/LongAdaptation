@@ -22,8 +22,8 @@ opts.DataLines = [i, 600000+i];
 opts.Delimiter = ",";
 
 % Import the data
- EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL01\PC1\YL01\YL01_\YL01_Trial001_Plot_and_Store_Rep_2.5.csv", opts);
-
+%  EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL01\PC1\YL01\YL01_\YL01_Trial001_Plot_and_Store_Rep_2.5.csv", opts);
+ EMGdata= readtable("Z:\Users\Dulce\Nexus\EMG05\PC2\EMG05\Long_Trigger_Rep_1.0.csv", opts);
  saveas(EMGdata, ['YL01_adapt_',num2str(i)])
 end
 

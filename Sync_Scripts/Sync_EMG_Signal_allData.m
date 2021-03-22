@@ -1,4 +1,5 @@
 %Comparing Signals
+cd('Z:\Users\Dulce\Nexus\EMG05\New Session')
 close all
 clear all
 R=2;
@@ -6,10 +7,11 @@ ini=1;
 data_PC1=[];
 data_PC2=[];
 forcedataall=[];
-H=btkReadAcquisition('Trial02.c3d');
+H=btkReadAcquisition('Trial05.c3d');
 [analogs,analogsInfo]=btkGetAnalogs(H);
 
 column=61;
+
 for i=1:9
     
     % forcedata= expData.data{2}.GRFData.Data(1:300000,3);
@@ -22,14 +24,16 @@ for i=1:9
     end
     % forcedata= analogs.Raw_Pin_3(300001:300001+300000)- mean(analogs.Raw_Pin_3(1:300000));
     
-    load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL01\PC1\YL01\YL01_\EMG_Trial02_',num2str(i),'.mat'])
+%     load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL01\PC1\YL01\YL01_\EMG_Trial02_',num2str(i),'.mat'])
+    
+    load(['Z:\Users\Dulce\Nexus\EMG05\PC1\EMG05\EMG_Trial05_',num2str(i),'.mat'])
     % EMG_PC2=EMGdata(:,end);
     % EMG_PC2=EMG_PC2(1:R:end);
    
     aux1=EMGdata;%- mean(EMGdata(:,end))
     aux1=aux1(1:R:end,:);
     
-    load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL01\PC2\YL01_Trial01\EMG_Trial02_',num2str(i),'.mat'])
+    load(['Z:\Users\Dulce\Nexus\EMG05\PC2\EMG05\EMG_Trial05_',num2str(i),'.mat'])
     % EMG_PC1=EMGdata(:,end);
     % EMG_PC1=EMG_PC1(1:R:end);
     aux2=EMGdata;%- mean(EMGdata(:,end));
@@ -38,18 +42,18 @@ for i=1:9
     
     
     
-    if i<8
+%     if i<8
         [~,~,lagInSamplesA,~] = matchSignals(forcedata,aux1(:,column));
         aux1 = resampleShiftAndScale(aux1,1,lagInSamplesA,1);
-    end
+%     end
     
     
-    [~,~,lagInSamplesB,~] = matchSignals(forcedata,aux2(:,column));
-    aux2 = resampleShiftAndScale(aux2,1,lagInSamplesB,1);
+%     [~,~,lagInSamplesB,~] = matchSignals(forcedata,aux2(:,column));
+%     aux2 = resampleShiftAndScale(aux2,1,lagInSamplesB,1);
     
-    if i==8
-        aux1=[zeros(50,64); aux1];
-    end
+%     if i==8
+%         aux1=[zeros(50,64); aux1];
+%     end
     
     if length(aux1)~=length(aux2)
         [aux1,aux2] = truncateToSameLength(aux1,aux2);
