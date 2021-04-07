@@ -3,16 +3,14 @@
 % load('.../GYAAT_01.mat');
 
 %% Align it
-% conds={'TM Base','Adap'};
-% conds={'TM slow','TM fast','TM base','adap','TM post','Short split positivo','Short split negativo'};
 conds={'TM Base','Adap'};
-conds
+
 events={'RHS','LTO','LHS','RTO'};
 alignmentLengths=[16,32,16,32];
 % muscle={'MG','RF','VL','SEMT','TA'};
-% muscle={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'ADM', 'HIP'};
 muscle={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'ADM'};
-
+% muscle={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'ADM'};
+% muscle={'TA', 'PER', 'SOL', 'LG','MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF'};
 lm=1:2:35;
 for s=5
 % load(['SCB0',num2str(s), '.mat'])
@@ -30,7 +28,7 @@ LBase=expData.getAlignedField('procEMGData',conds(1),events([3,4,1,2]),alignment
 % 
 RAdap=expData.getAlignedField('procEMGData',conds(2),events,alignmentLengths).getPartialDataAsATS({['R' muscle{m}]});
 LAdap=expData.getAlignedField('procEMGData',conds(2),events([3,4,1,2]),alignmentLengths).getPartialDataAsATS({['L' muscle{m}]});
-% 
+
 % RPost=expData.getAlignedField('procEMGData',conds(5),events,alignmentLengths).getPartialDataAsATS({['R' muscle{m}]});
 % LPost=expData.getAlignedField('procEMGData',conds(5),events([3,4,1,2]),alignmentLengths).getPartialDataAsATS({['L' muscle{m}]});
 % 
@@ -67,7 +65,7 @@ for l=1:2
             B=RBase.getPartialStridesAsATS(find(RBase.Data(end-40:end)));
             A=RAdap.getPartialStridesAsATS(find(RAdap.Data(100:110)));
             A_late=RAdap.getPartialStridesAsATS(find(RAdap.Data(2000:2050)));
-            A_post=RAdap.getPartialStridesAsATS(find(RAdap.Data(2090:2100)));
+%             A_post=RAdap.getPartialStridesAsATS(find(RAdap.Data(2090:2100)));
 %             S=RBaseSlow.getPartialStridesAsATS(find(RBaseSlow.Data(end-40:end)));%23:73 03 range 
 %             F=RBaseFast.getPartialStridesAsATS(find(RBaseFast.Data(end-40:end)));
 %             P=RPost.getPartialStridesAsATS(find(RPost.Data(end-40:end)));
@@ -78,7 +76,7 @@ for l=1:2
             B=LBase.getPartialStridesAsATS(find(LBase.Data(end-40:end))); % young 110:150
             A=LAdap.getPartialStridesAsATS(find(LAdap.Data(100:110))); %young 900-50:898
             A_late=LAdap.getPartialStridesAsATS(find(RAdap.Data(2000:2050)));
-            A_post=LAdap.getPartialStridesAsATS(find(RAdap.Data(2090:2100)));
+%             A_post=LAdap.getPartialStridesAsATS(find(RAdap.Data(2090:2100)));
 %             S=LBaseSlow.getPartialStridesAsATS(find(LBaseSlow.Data(end-40:end))); %young 60:95
 %             F=LBaseFast.getPartialStridesAsATS(find(LBaseFast.Data(end-40:end)));
 %             P=LPost.getPartialStridesAsATS(find(LPost.Data(end-40:end))); %young 300-50:300
@@ -110,7 +108,7 @@ fs=16; %FontSize
     B.plot(fh,ph,condColors(1,:),[],0,[-49:0],prc,true);
     A.plot(fh,ph,condColors(2,:),[],0,[-49:0],prc,true);
     A_late.plot(fh,ph,condColors(3,:),[],0,[-49:0],prc,true);
-    A_post.plot(fh,ph,condColors(4,:),[],0,[-49:0],prc,true);
+%     A_post.plot(fh,ph,condColors(4,:),[],0,[-49:0],prc,true);
 %     P.plot(fh,ph,condColors(5,:),[],0,[-49:0],prc,true);
 %     Pos.plot(fh,ph,condColors(6,:),[],0,[-49:0],prc,true);
 %     N.plot(fh,ph,condColors(7,:),[],0,[-49:0],prc,true);
@@ -187,5 +185,5 @@ fs=16; %FontSize
 %     saveFig(fh,'./',['Fig1B_' num2str(l)],1)
 end
 end
-legend(ll(end:-1:1),conds{1:2})
+legend(ll(end:-1:1),condlegend{1:3})
 end%%

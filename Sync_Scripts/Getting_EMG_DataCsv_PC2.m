@@ -16,22 +16,38 @@ opts = setvaropts(opts, [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 
 opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
-l=0;
-for i=2:600000:5299001 %4874001 %164001
-% Specify range and delimiter
-l=l+1;
-opts.DataLines = [i, 600000+i];
-opts.Delimiter = ",";
-
-
-% Import the data
-
-% YL01Trial01PlotandStoreRep2 = readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL01\PC2\YL01_Trial01\YL01_Trial01_Plot_and_Store_Rep_2.4.csv", opts);
-EMGdata= readtable("Z:\Users\Dulce\Nexus\EMG05\PC2\EMG05\Long_Trigger__Rep_1.0.csv", opts);
-% Convert to output type
-EMGdata = table2array(EMGdata);
-
-save(['EMG_Trial05_' num2str(l),'.mat'], 'EMGdata')
-end 
+idx=0;
+for t=7:13
+    idx=idx+1;
+    tend=[340001,254001,289001,5817001,681001,697001,567001];
+    l=0;
+    
+    for i=2:600000:tend(idx) %4874001 %164001
+        % Specify range and delimiter
+        l=l+1;
+        opts.DataLines = [i, 600000+i];
+        opts.Delimiter = ",";
+        
+        
+        % Import the data
+        % EMGdata= readtable("Z:\Users\Dulce\Nexus\EMG05\PC2\EMG05\Long_Trigger__Rep_1.0.csv", opts);
+        if t<10
+            EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial0',num2str(t),'.csv'], opts);
+            % Convert to output type
+        else
+            EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial',num2str(t),'.csv'], opts);
+            
+            %             EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial09.csv", opts);
+            
+        end
+        EMGdata = table2array(EMGdata);
+        if t<10
+            save(['EMG_Trial0',num2str(t),'_' num2str(l),'.mat'], 'EMGdata')
+        else
+            save(['EMG_Trial',num2str(t),'_' num2str(l),'.mat'], 'EMGdata')
+        end
+        
+    end
+end
 %% Clear temporary variables
 clear opts
