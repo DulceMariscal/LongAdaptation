@@ -6,6 +6,7 @@
 % conds={'TM Base','Adap'};
 % conds={'TM slow','TM fast','TM base','adap','TM post','Short split positivo','Short split negativo'};
 conds={'TM Base','Adap'};
+conds
 events={'RHS','LTO','LHS','RTO'};
 alignmentLengths=[16,32,16,32];
 % muscle={'MG','RF','VL','SEMT','TA'};
