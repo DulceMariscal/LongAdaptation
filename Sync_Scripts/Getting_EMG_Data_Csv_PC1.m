@@ -15,54 +15,60 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 opts.Delimiter = ",";
 
-
+cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename')
 idx=0;
-for t=7:13
-    idx=idx+1;
-    tend=[340001,254001,289001,5817001,681001,697001,567001];
+for t=[1:9 13:17]
+    %     idx=idx+1;
+    %     tend=[ 319001,246001,271001,5711001,1075001,539001];
     l=0;
-    
-    for i=2:600000:tend(idx) %4874001 %164001
+    if t<10
+%         EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial0',num2str(t),'.csv'], opts);
+            EMGdata= readtable(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename\Trial0',num2str(t),'.csv'], opts);
+        % Convert to output type
+    else
+        EMGdata= readtable(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename\Trial',num2str(t),'.csv'], opts);
+%         EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial',num2str(t),'.csv'], opts);
+        
+        %             EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial09.csv", opts);
+        
+    end
+    tend=height(EMGdata);
+    for i=2:600000:tend %4874001 %164001
         % Specify range and delimiter
         l=l+1;
-        opts.DataLines = [i, 600000+i];
-        opts.Delimiter = ",";
+%         opts.DataLines = [i, 600000+i];
+%         opts.Delimiter = ",";
         
         
         % Import the data
         % EMGdata= readtable("Z:\Users\Dulce\Nexus\EMG05\PC2\EMG05\Long_Trigger__Rep_1.0.csv", opts);
-        if t<10
-            EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC1\Rename\Trial0',num2str(t),'.csv'], opts);
-            % Convert to output type
+        %         if t<10
+        %             EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial0',num2str(t),'.csv'], opts);
+        %             % Convert to output type
+        %         else
+        %             EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial',num2str(t),'.csv'], opts);
+        %
+        %             %             EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial09.csv", opts);
+        %
+        %         end
+        range=i:600000+i;
+        
+        if range(end)<tend
+            data=EMGdata(i:600000+i ,:);
         else
-            EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC1\Rename\Trial',num2str(t),'.csv'], opts);
-            
-            %             EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial09.csv", opts);
-            
+            data=EMGdata(i:end,:);
         end
-        EMGdata = table2array(EMGdata);
+        
+        EMGdata2 = table2array(data);
+        
         if t<10
-            save(['EMG_Trial0',num2str(t),'_' num2str(l),'.mat'], 'EMGdata')
+            save(['EMG_Trial0',num2str(t),'_' num2str(l),'.mat'], 'EMGdata2')
         else
-            save(['EMG_Trial',num2str(t),'_' num2str(l),'.mat'], 'EMGdata')
+            save(['EMG_Trial',num2str(t),'_' num2str(l),'.mat'], 'EMGdata2')
         end
         
     end
 end
 
-% l=0;
-% for i=2:600000:7068001%164000%6643001 5067001
-% % Specify range and delimiter
-% l=l+1;
-% opts.DataLines = [i, 600000+i];
-% 
-% % Import the data
-% % EMGdata = readtable("Z:\Users\Dulce\Nexus\EMG05\PC1\EMG05\Long_Trigger__Rep_1.10.csv", opts);
-% EMGdata = readtable("Y:\Alyssa\Alyssa\PC1\Trial01_Trigger__Rep_5.4.csv", opts);
-% %% Convert to output type
-% EMGdata= table2array(EMGdata);
-% 
-% save(['EMG_Trial01_' num2str(l),'.mat'], 'EMGdata')
-% end
 %% Clear temporary variables
 clear opts
