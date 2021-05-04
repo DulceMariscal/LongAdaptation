@@ -34,10 +34,10 @@ for t=[9 11:17 19 21 22 24]
         Data= readtable([dir,'\Trial',num2str(t),'.csv'], opts);
     end
     tend=height(Data);
-    for i=2:600000:tend
+    for i=2:600000:tend 
         % Specify range and delimiter
         l=l+1;
-        
+
         
         range=i:600000+i;
         
@@ -58,4 +58,3 @@ for t=[9 11:17 19 21 22 24]
 end
 %% Clear temporary variables
 clear opts
-end

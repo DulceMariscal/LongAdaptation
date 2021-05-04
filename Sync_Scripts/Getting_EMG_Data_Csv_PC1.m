@@ -1,3 +1,5 @@
+
+function Getting_EMGdata_Csv2mat_PC1(dir1, trials)
 %% Import data from text file
 % Script for importing data from the following text file:
 
@@ -15,56 +17,34 @@ opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 opts.Delimiter = ",";
 
-cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename')
+cd('Y:\Dulce\R01_Nimbus2021\VROG_02\PC1')
 idx=0;
-for t=[1:9 13:17]
-    %     idx=idx+1;
-    %     tend=[ 319001,246001,271001,5711001,1075001,539001];
+for t=[9 11:17 19 21 22 24]
     l=0;
     if t<10
-%         EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial0',num2str(t),'.csv'], opts);
-            EMGdata= readtable(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename\Trial0',num2str(t),'.csv'], opts);
-        % Convert to output type
+        Data= readtable(['Y:\Dulce\R01_Nimbus2021\VROG_02\PC1\Trial0',num2str(t),'.csv'], opts);   
     else
-        EMGdata= readtable(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename\Trial',num2str(t),'.csv'], opts);
-%         EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial',num2str(t),'.csv'], opts);
-        
-        %             EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial09.csv", opts);
-        
+        Data= readtable(['Y:\Dulce\R01_Nimbus2021\VROG_02\PC1\Trial',num2str(t),'.csv'], opts);
     end
-    tend=height(EMGdata);
-    for i=2:600000:tend %4874001 %164001
+    tend=height(Data);
+    for i=2:600000:tend
         % Specify range and delimiter
         l=l+1;
-%         opts.DataLines = [i, 600000+i];
-%         opts.Delimiter = ",";
         
-        
-        % Import the data
-        % EMGdata= readtable("Z:\Users\Dulce\Nexus\EMG05\PC2\EMG05\Long_Trigger__Rep_1.0.csv", opts);
-        %         if t<10
-        %             EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial0',num2str(t),'.csv'], opts);
-        %             % Convert to output type
-        %         else
-        %             EMGdata= readtable(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\Trial',num2str(t),'.csv'], opts);
-        %
-        %             %             EMGdata= readtable("C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL02\PC2\Rename\Trial09.csv", opts);
-        %
-        %         end
         range=i:600000+i;
         
         if range(end)<tend
-            data=EMGdata(i:600000+i ,:);
+            data2=Data(i:600000+i ,:);
         else
-            data=EMGdata(i:end,:);
+            data2=Data(i:end,:);
         end
         
-        EMGdata2 = table2array(data);
+        EMGdata = table2array(data2);
         
         if t<10
-            save(['EMG_Trial0',num2str(t),'_' num2str(l),'.mat'], 'EMGdata2')
+            save(['EMG_Trial0',num2str(t),'_' num2str(l),'.mat'], 'EMGdata')
         else
-            save(['EMG_Trial',num2str(t),'_' num2str(l),'.mat'], 'EMGdata2')
+            save(['EMG_Trial',num2str(t),'_' num2str(l),'.mat'], 'EMGdata')
         end
         
     end
@@ -72,3 +52,4 @@ end
 
 %% Clear temporary variables
 clear opts
+end 
