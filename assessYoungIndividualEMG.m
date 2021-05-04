@@ -2,7 +2,7 @@
 
 % load('/Users/samirsherlekar/Desktop/emg/Data/normalizedYoungEmgData.mat');
 % load('C:\Users\dum5\Box\GeneralizationStudy Data\NormalizedFastYoungEMGData.mat')
-sub={'YL01paramsNewConditions'};
+sub={'YL02params'};
 
 normalizedTMFullAbrupt=adaptationData.createGroupAdaptData(sub);
 
@@ -14,7 +14,7 @@ normalizedTMFullAbrupt=normalizedTMFullAbrupt.renameParams(ss,s2);
 % normalizedTMFullAbrupt=studyData.TMFullAbrupt.renameParams(ss,s2);
 
 % muscleOrder={'TA','MG','SEMT','VL','RF'};
-muscleOrder={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'ADM'};
+muscleOrder={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'HIP','ADM'};
 n_muscles = length(muscleOrder);
 useLateAdaptAsBaseline=false;
 
