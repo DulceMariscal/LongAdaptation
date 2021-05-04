@@ -1,9 +1,9 @@
 %Comparing Signals
-% cd('C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\New Session')
-cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\New Session2')
+cd('Y:\Dulce\R01_Nimbus2021\VROG_Devon\New Session')
+% cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\New Session2')
 close all
 clear all
-t=17;
+t=12;
 R=2;
 ini=1;
 data_PC1=[];
@@ -36,25 +36,26 @@ for i=1:tt
     
     %     load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\EMG_Trial04_',num2str(i),'.mat'])
     if t<10
-        load(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
+        
+        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC1\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
     else
-        load(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC1\Rename\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
+        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC1\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
     end
     % EMG_PC2=EMGdata(:,end);
     % EMG_PC2=EMG_PC2(1:R:end);
     
-    aux1=EMGdata2;%- mean(EMGdata(:,end))
+    aux1=EMGdata;%- mean(EMGdata(:,end))
     aux1=aux1(1:R:end,:);
     
     %     load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC2\EMG_Trial04_',num2str(i),'.mat'])
     if t<10
-        load(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC2\Rename\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
+        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC2\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
     else
-        load(['Y:\Dulce\R01_Nimbus2021\NimG_Boyan\EMG\Session 2\PC2\Rename\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
+        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC2\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
     end
     % EMG_PC1=EMGdata(:,end);
     % EMG_PC1=EMG_PC1(1:R:end);
-    aux2=EMGdata2;%- mean(EMGdata(:,end));
+    aux2=EMGdata;%- mean(EMGdata(:,end));
     aux2=aux2(1:R:end,:);
     
     
