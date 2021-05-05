@@ -1,9 +1,18 @@
 %Comparing Signals
-cd('Y:\Dulce\R01_Nimbus2021\VROG_Devon\New Session')
-% cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\New Session2')
+
 close all
 clear all
-t=12;
+% cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\New Session2')
+
+
+
+nexus='Y:\Dulce\R01_Nimbus2021\VROG_02\New Session';
+PC1='Y:\Dulce\R01_Nimbus2021\VROG_02\PC1';
+PC2='Y:\Dulce\R01_Nimbus2021\VROG_02\PC2';
+
+cd(nexus)
+t=24;
+tt=2;
 R=2;
 ini=1;
 data_PC1=[];
@@ -18,7 +27,7 @@ end
 
 column=61;
 
-tt=1;
+
 
 for i=1:tt
     
@@ -37,9 +46,9 @@ for i=1:tt
     %     load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\EMG_Trial04_',num2str(i),'.mat'])
     if t<10
         
-        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC1\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
+        load([PC1,'\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
     else
-        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC1\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
+        load([PC1,'\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
     end
     % EMG_PC2=EMGdata(:,end);
     % EMG_PC2=EMG_PC2(1:R:end);
@@ -49,9 +58,9 @@ for i=1:tt
     
     %     load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC2\EMG_Trial04_',num2str(i),'.mat'])
     if t<10
-        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC2\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
+        load([PC2,'\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
     else
-        load(['Y:\Dulce\R01_Nimbus2021\VROG_Devon\PC2\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
+        load([PC2,'\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
     end
     % EMG_PC1=EMGdata(:,end);
     % EMG_PC1=EMG_PC1(1:R:end);
@@ -89,14 +98,14 @@ for i=1:tt
     
     
     ini=ini+length(aux1);
-    figure()
-    % subplot(2,1,1)
-    plot(aux1(:,column)-mean(aux1(:,column)))
-    hold on
-    plot(aux2(:,column)-mean(aux2(:,column)))
-    hold on
-    plot(forcedata,'--')
-    legend('PC1','PC2','Pin3')
+%     figure()
+%     % subplot(2,1,1)
+%     plot(aux1(:,column)-mean(aux1(:,column)))
+%     hold on
+%     plot(aux2(:,column)-mean(aux2(:,column)))
+%     hold on
+%     plot(forcedata,'--')
+%     legend('PC1','PC2','Pin3')
     if t<10
         title(['Trial0',num2str(t)])
     else
@@ -111,20 +120,39 @@ for i=1:tt
     forcedataall=[forcedataall;forcedata];
 end
 %%
-figure()
-plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
-hold on
-plot(forcedataall)
+% figure()
+% plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
+% hold on
+% plot(forcedataall)
+% 
+% figure()
+% plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
+% hold on
+% plot(data_PC1(:,column)- mean(data_PC1(:,column)))
+% hold on
+% plot(data_PC2(:,column)- mean(data_PC2(:,column)))
+% legend('Force','PC1','PC2')
+% 
+% figure()
+% plot(data_PC1(:,column)- mean(data_PC1(:,column))-(data_PC2(:,column)- mean(data_PC2(:,column))))
+% ylim([-0.25 0.2])
+% ylabel('PC1 - PC2 (mV)')
 
-figure()
-plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
-hold on
-plot(data_PC1(:,column)- mean(data_PC1(:,column)))
-hold on
-plot(data_PC2(:,column)- mean(data_PC2(:,column)))
-legend('Force','PC1','PC2')
+cd(PC1)
+load('Names.mat')
+Data=data_PC1';
+if t<10
+    save(['Trial0', num2str(t)],'Channels','Data','Fs')
+else
+    save(['Trial', num2str(t)],'Channels','Data','Fs')
+end
 
-figure()
-plot(data_PC1(:,column)- mean(data_PC1(:,column))-(data_PC2(:,column)- mean(data_PC2(:,column))))
-ylim([-0.25 0.2])
-ylabel('PC1 - PC2 (mV)')
+cd(PC2)
+load('Names.mat')
+Data=data_PC2';
+if t<10
+    save(['Trial0', num2str(t)],'Channels','Data','Fs')
+else
+    save(['Trial', num2str(t)],'Channels','Data','Fs')
+end
+cd(PC1)

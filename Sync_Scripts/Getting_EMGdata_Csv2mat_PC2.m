@@ -1,5 +1,5 @@
 
-function Getting_EMGdata_Csv2mat_PC2(dir2, trials)
+function Getting_EMGdata_Csv2mat_PC2(dir, trials)
 %% Import data from text file
 % Script for importing data from the following text file:
 %
@@ -20,7 +20,7 @@ opts.EmptyLineRule = "read";
 opts.Delimiter = ",";
 
 % dir='Y:\Dulce\R01_Nimbus2021\VROG_02\PC2';
-cd(dir2)
+cd(dir)
 
 idx=0;
 for t=trials
