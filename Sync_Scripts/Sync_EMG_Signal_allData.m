@@ -2,17 +2,16 @@
 
 close all
 clear all
-% cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\New Session2')
 
 
 
-nexus='Y:\Dulce\R01_Nimbus2021\VROG_02\New Session';
-PC1='Y:\Dulce\R01_Nimbus2021\VROG_02\PC1';
-PC2='Y:\Dulce\R01_Nimbus2021\VROG_02\PC2';
+nexus='Y:\Dulce\R01_Nimbus2021\EMGTestFreq - Copy\New Session';
+PC1='Y:\Dulce\R01_Nimbus2021\EMGTestFreq - Copy\PC1';
+PC2='Y:\Dulce\R01_Nimbus2021\EMGTestFreq - Copy\PC2';
 
 cd(nexus)
-t=24;
-tt=2;
+t=9;
+tt=6;
 R=2;
 ini=1;
 data_PC1=[];
@@ -25,8 +24,10 @@ else
 end
 [analogs,analogsInfo]=btkGetAnalogs(H);
 
-column=61;
-
+% both 61 for our sensors
+% col_PC1=55 and col_PC2=67 for loaner sensors
+column_PC1=61;
+column_PC2=61;
 
 
 for i=1:tt
@@ -34,8 +35,8 @@ for i=1:tt
     % forcedata= expData.data{2}.GRFData.Data(1:300000,3);
     
     if i<tt
-        forcedata= analogs.Raw_Pin_3(ini:ini+300000)- mean(analogs.Raw_Pin_3(ini:ini+300000));
-        %         forcedata= analogs.Raw_Pin_3(ini:end)- mean(analogs.Raw_Pin_3(ini:end));
+       forcedata= analogs.Raw_Pin_3(ini:ini+300000)- mean(analogs.Raw_Pin_3(ini:ini+300000));
+%                  forcedata= analogs.Raw_Pin_3(ini:end)- mean(analogs.Raw_Pin_3(ini:end));
     else
         forcedata= analogs.Raw_Pin_3(ini:end)- mean(analogs.Raw_Pin_3(ini:end));
     end
@@ -45,7 +46,6 @@ for i=1:tt
     
     %     load(['C:\Users\dum5\OneDrive - University of Pittsburgh\aResearch_Studies\Young_LongAdaptation\YL03\PC1\EMG_Trial04_',num2str(i),'.mat'])
     if t<10
-        
         load([PC1,'\EMG_Trial0',num2str(t),'_',num2str(i),'.mat'])
     else
         load([PC1,'\EMG_Trial',num2str(t),'_',num2str(i),'.mat'])
@@ -68,15 +68,17 @@ for i=1:tt
     aux2=aux2(1:R:end,:);
     
     
+%     aux1=aux1(1:length(forcedata),:);
+%     aux2=aux2(1:length(forcedata),:);
     
     
     %     if i<8
-    [~,~,lagInSamplesA,~] = matchSignals(forcedata,aux1(:,column));
+    [~,~,lagInSamplesA,~] = matchSignals(forcedata,aux1(:,column_PC1));
     aux1 = resampleShiftAndScale(aux1,1,lagInSamplesA,1);
     %     end
     
     
-    [~,~,lagInSamplesB,~] = matchSignals(forcedata,aux2(:,column));
+    [~,~,lagInSamplesB,~] = matchSignals(forcedata,aux2(:,column_PC2));
     aux2 = resampleShiftAndScale(aux2,1,lagInSamplesB,1);
     
     %     if i==8
@@ -98,14 +100,14 @@ for i=1:tt
     
     
     ini=ini+length(aux1);
-%     figure()
-%     % subplot(2,1,1)
-%     plot(aux1(:,column)-mean(aux1(:,column)))
-%     hold on
-%     plot(aux2(:,column)-mean(aux2(:,column)))
-%     hold on
-%     plot(forcedata,'--')
-%     legend('PC1','PC2','Pin3')
+    figure()
+    % subplot(2,1,1)
+    plot(aux1(:,column_PC1)-mean(aux1(:,column_PC1)))
+    hold on
+    plot(aux2(:,column_PC2)-mean(aux2(:,column_PC2)))
+    hold on
+    plot(forcedata,'--')
+    legend('PC1','PC2','Pin3')
     if t<10
         title(['Trial0',num2str(t)])
     else
@@ -120,23 +122,23 @@ for i=1:tt
     forcedataall=[forcedataall;forcedata];
 end
 %%
-% figure()
-% plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
-% hold on
-% plot(forcedataall)
-% 
-% figure()
-% plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
-% hold on
-% plot(data_PC1(:,column)- mean(data_PC1(:,column)))
-% hold on
-% plot(data_PC2(:,column)- mean(data_PC2(:,column)))
-% legend('Force','PC1','PC2')
-% 
-% figure()
-% plot(data_PC1(:,column)- mean(data_PC1(:,column))-(data_PC2(:,column)- mean(data_PC2(:,column))))
-% ylim([-0.25 0.2])
-% ylabel('PC1 - PC2 (mV)')
+figure()
+plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
+hold on
+plot(forcedataall)
+
+figure()
+plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
+hold on
+plot(data_PC1(:,column_PC1)- mean(data_PC1(:,column_PC1)))
+hold on
+plot(data_PC2(:,column_PC2)- mean(data_PC2(:,column_PC2)))
+legend('Force','PC1','PC2')
+
+figure()
+plot(data_PC1(:,column_PC1)- mean(data_PC1(:,column_PC1))-(data_PC2(:,column_PC2)- mean(data_PC2(:,column_PC2))))
+ylim([-0.25 0.2])
+ylabel('PC1 - PC2 (mV)')
 
 cd(PC1)
 load('Names.mat')
