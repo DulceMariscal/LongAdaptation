@@ -10,8 +10,8 @@ PC1='Y:\Dulce\R01_Nimbus2021\CTR_03\PC1';
 PC2='Y:\Dulce\R01_Nimbus2021\CTR_03\PC2';
 
 cd(nexus)
-t=18;
-tt=3;
+t=22;
+tt=1;
 R=2;
 ini=1;
 data_PC1=[];

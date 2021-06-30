@@ -3,21 +3,22 @@
 % load('.../GYAAT_01.mat');
 
 %% Align it
-conds={'Slow base','Fast base','TM base','Adaptation','Post adapt','Shor Splits'};
+conds={'Mid Base','Fast Base'};
 
 events={'RHS','LTO','LHS','RTO'};
 alignmentLengths=[16,32,16,32];
 
-muscle={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'HIP'};
+% muscle={'TA', 'PER', 'SOL', 'LG', 'MG', 'BF', 'SEMB', 'SEMT', 'VM', 'VL', 'RF', 'TFL', 'GLU', 'HIP'};
+muscle={'TA', 'PER',  'VM', 'VL', 'RF'};
 lm=1:2:35;
 
 late=0;
 
 if late==1
     
-    condlegend={'SlowLate','FastLate','MidLate','AdaptLate','PostAdaptLate'};
+    condlegend={'MidBase_{late}','Fast_{late}'};
 else
-    condlegend={'AdaptationEary','PostAdaptEarly','PostivePert','NegativePert'};
+    condlegend={'MidBase_{early}','Fast_{early}'};
     
 end
 
