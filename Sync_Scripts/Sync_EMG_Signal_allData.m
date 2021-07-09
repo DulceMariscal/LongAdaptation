@@ -5,13 +5,13 @@ clear all
 
 
 
-nexus='Y:\Dulce\R01_Nimbus2021\CTR_03\New Session';
-PC1='Y:\Dulce\R01_Nimbus2021\CTR_03\PC1';
-PC2='Y:\Dulce\R01_Nimbus2021\CTR_03\PC2';
+nexus='Y:\Dulce\R01_Nimbus2021\CTR_04\New Session';
+PC1='Y:\Dulce\R01_Nimbus2021\CTR_04\PC1';
+PC2='Y:\Dulce\R01_Nimbus2021\CTR_04\PC2';
 
 cd(nexus)
-t=18;
-tt=3;
+t=14;
+tt=2;
 R=2;
 ini=1;
 data_PC1=[];
@@ -68,8 +68,8 @@ for i=1:tt
     aux2=aux2(1:R:end,:);
     
     
-%     aux1=aux1(1:length(forcedata),:);
-%     aux2=aux2(1:length(forcedata),:);
+% %     aux1=aux1(1:length(forcedata),:);
+% %     aux2=aux2(1:length(forcedata),:);
     
     
     %     if i<8
