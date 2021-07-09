@@ -1,27 +1,22 @@
 % Script to concatenate individual EMG trial data and force data seperately
-% Include trial number as t
-% Include number of subdivisions of data that you are trying to concatenate
-% in tt
+% Use if PC1
 % Created 5/24/2021
-% Last Updated 7/9/2021
+% Last Updated 6/30/2021
 
 close all;
 clear all;
 clc
-
-% update subject ID
-subID = 'CTR_04';
+% cd('Y:\Dulce\R01_Nimbus2021\NimG_Boyan\New Session2')
 
 % Assign locations of data
-nexus=['Y:\Dulce\R01_Nimbus2021\',subID,'\New Session'];
-PC1=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC1'];
-PC2=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC2'];
+nexus='Y:\Dulce\R01_Nimbus2021\CTR_03\New Session';
+PC1='Y:\Dulce\R01_Nimbus2021\CTR_03\PC1';
+PC2='Y:\Dulce\R01_Nimbus2021\CTR_03\PC2';
 
 cd(nexus)
 %% Data info
-% update t and tt
-t=14;
-tt=2;
+t=18;
+tt=3;
 R=2;
 ini=1;
 data_PC1=[];
@@ -42,74 +37,32 @@ column_PC2=67;
 % sampled at 2000 Hz, so need to cut data down by half (R = 2) to get at
 % same sampling frequency as force data (1000 Hz)
 
-%% PC1 trial concatenation
-switch tt
-    case(1)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC1_1 = EMGdata;
-        data_PC1 = EMGDataPC1_1;
-    case(2)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC1_1 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_2']]);
-        EMGDataPC1_2 = EMGdata;
-        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2];
-    case(3)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC1_1 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_2']]);
-        EMGDataPC1_2 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_3']]);
-        EMGDataPC1_3 = EMGdata;
-        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3];
-    case(4)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC1_1 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_2']]);
-        EMGDataPC1_2 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_3']]);
-        EMGDataPC1_3 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_4']]);
-        EMGDataPC1_4 = EMGdata;
-        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4];
-end
+load([PC1,'\EMG_Trial18_1']);
+EMGDataPC1_1 = EMGdata;
+% % data_PC1 = EMGDataPC1_1;
+load([PC1,'\EMG_Trial18_2']);
+EMGDataPC1_2 = EMGdata;
+% Use following if 3 portions of data required to concat
+load([PC1,'\EMG_Trial18_3']);
+EMGDataPC1_3 = EMGdata;
 
-%% PC2
-switch tt
-    case(1)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC2_1 = EMGdata;
-        data_PC2 = EMGDataPC2_1;
-    case(2)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC2_1 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_2']]);
-        EMGDataPC2_2 = EMGdata;
-        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2];
-    case(3)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC2_1 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_2']]);
-        EMGDataPC2_2 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_3']]);
-        EMGDataPC2_3 = EMGdata;
-        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3];
-    case(4)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
-        EMGDataPC2_1 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_2']]);
-        EMGDataPC2_2 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_3']]);
-        EMGDataPC2_3 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_4']]);
-        EMGDataPC2_4 = EMGdata;
-        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4];
-end
+data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3];    %concat data
+% data_PC1 = EMGDataPC1_1;
 
-       
 aux1 = data_PC1;%- mean(EMGdata(:,end));
     aux1=aux1(1:R:end,:);
     
+load([PC2,'\EMG_Trial18_1']);
+EMGDataPC2_1 = EMGdata;
+% % data_PC2 = EMGDataPC2_1;
+load([PC2,'\EMG_Trial18_2']);
+EMGDataPC2_2 = EMGdata;
+% Use following if 3 portions of data required to concat
+load([PC2,'\EMG_Trial18_3']);
+EMGDataPC2_3 = EMGdata;
+
+data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3];
+% data_PC2 = EMGDataPC2_1;
 
 aux2=data_PC2;%- mean(EMGdata(:,end));
     aux2=aux2(1:R:end,:);
