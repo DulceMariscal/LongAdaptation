@@ -45,31 +45,31 @@ column_PC2=67;
 %% PC1 trial concatenation
 switch tt
     case(1)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
         data_PC1 = EMGDataPC1_1;
     case(2)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_2']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC1_2 = EMGdata;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2];
     case(3)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_2']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC1_2 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_3']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_3']);
         EMGDataPC1_3 = EMGdata;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3];
     case(4)
-        load([PC1,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_2']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC1_2 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_3']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_3']);
         EMGDataPC1_3 = EMGdata;
-        load([PC1,['\EMG_Trial',num2str(t),'_4']]);
+        load([PC1,'\EMG_Trial',num2str(t),'_4']);
         EMGDataPC1_4 = EMGdata;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4];
 end
@@ -77,31 +77,31 @@ end
 %% PC2
 switch tt
     case(1)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC2_1 = EMGdata;
         data_PC2 = EMGDataPC2_1;
     case(2)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC2_1 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_2']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC2_2 = EMGdata;
         data_PC2 = [EMGDataPC2_1;EMGDataPC2_2];
     case(3)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC2_1 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_2']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC2_2 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_3']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_3']);
         EMGDataPC2_3 = EMGdata;
         data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3];
     case(4)
-        load([PC2,['\EMG_Trial',num2str(t),'_1']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC2_1 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_2']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC2_2 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_3']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_3']);
         EMGDataPC2_3 = EMGdata;
-        load([PC2,['\EMG_Trial',num2str(t),'_4']]);
+        load([PC2,'\EMG_Trial',num2str(t),'_4']);
         EMGDataPC2_4 = EMGdata;
         data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4];
 end

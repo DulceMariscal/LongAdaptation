@@ -3,11 +3,11 @@
 close all
 clear all
 
+subID = 'CTR_04';
 
-
-nexus='Y:\Dulce\R01_Nimbus2021\CTR_03\New Session';
-PC1='Y:\Dulce\R01_Nimbus2021\CTR_03\PC1';
-PC2='Y:\Dulce\R01_Nimbus2021\CTR_03\PC2';
+nexus=['Y:\Dulce\R01_Nimbus2021\',subID,'\New Session'];
+PC1=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC1'];
+PC2=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC2'];
 
 cd(nexus)
 t=18;
