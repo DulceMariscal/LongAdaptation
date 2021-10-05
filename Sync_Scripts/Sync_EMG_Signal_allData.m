@@ -3,15 +3,15 @@
 close all
 clear all
 
-subID = 'CTR_04';
+subID = 'Pilot2';
 
-nexus=['Y:\Dulce\R01_Nimbus2021\',subID,'\New Session'];
-PC1=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC1'];
-PC2=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC2'];
+nexus=['Y:\Dulce\DataBase2\',subID,'\New Session'];
+PC1=['Y:\Dulce\DataBase2\',subID,'\PC1'];
+PC2=['Y:\Dulce\DataBase2\',subID,'\PC2'];
 
 cd(nexus)
-t=18;
-tt=3;
+t=13;
+tt=2;
 R=2;
 ini=1;
 data_PC1=[];
@@ -26,8 +26,7 @@ end
 
 % both 61 for our sensors
 % col_PC1=55 and col_PC2=67 for loaner sensors
-column_PC1=55;
-column_PC2=67;
+
 
 
 for i=1:tt
@@ -52,7 +51,11 @@ for i=1:tt
     end
     % EMG_PC2=EMGdata(:,end);
     % EMG_PC2=EMG_PC2(1:R:end);
+    column_PC1= size(EMGdata,2)-3;
+    Channels1=Channels;
+    Fs1=Fs;
     
+   
     aux1=EMGdata;%- mean(EMGdata(:,end))
     aux1=aux1(1:R:end,:);
     
@@ -66,7 +69,9 @@ for i=1:tt
     % EMG_PC1=EMG_PC1(1:R:end);
     aux2=EMGdata;%- mean(EMGdata(:,end));
     aux2=aux2(1:R:end,:);
-    
+    column_PC2= size(EMGdata,2)-3;
+    Channels2=Channels;
+    Fs2=Fs;
     
 %     aux1=aux1(1:length(forcedata),:);
 %     aux2=aux2(1:length(forcedata),:);
@@ -143,8 +148,10 @@ ylim([-0.25 0.2])
 ylabel('PC1 - PC2 (mV)')
 
 cd(PC1)
-load('Names.mat')
+% load('Names.mat')
 Data=data_PC1';
+Channels=Channels1;
+Fs=Fs1;
 if t<10
     save(['Trial0', num2str(t)],'Channels','Data','Fs')
 else
@@ -152,11 +159,13 @@ else
 end
 
 cd(PC2)
-load('Names.mat')
+% load('Names.mat')
 Data=data_PC2';
+Channels=Channels2;
+Fs=Fs2;
 if t<10
     save(['Trial0', num2str(t)],'Channels','Data','Fs')
 else
     save(['Trial', num2str(t)],'Channels','Data','Fs')
 end
-cd(PC1)
+cd(PC2)
