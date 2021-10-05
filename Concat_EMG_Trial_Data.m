@@ -10,17 +10,17 @@ clear all;
 clc
 
 % update subject ID
-subID = 'CTR_04';
+subID = 'Pilot2';
 
 % Assign locations of data
-nexus=['Y:\Dulce\R01_Nimbus2021\',subID,'\New Session'];
-PC1=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC1'];
-PC2=['Y:\Dulce\R01_Nimbus2021\',subID,'\PC2'];
+nexus=['Y:\Dulce\DataBase2\',subID,'\New Session'];
+PC1=['Y:\Dulce\DataBase2\',subID,'\PC1'];
+PC2=['Y:\Dulce\DataBase2\',subID,'\PC2'];
 
 cd(nexus)
 %% Data info
 % update t and tt
-t=14;
+t=13;
 tt=2;
 R=2;
 ini=1;
@@ -35,8 +35,8 @@ else        %Trial numbers above 10 don't have 0 before trial number
 end
 [analogs,analogsInfo]=btkGetAnalogs(H);
 
-column_PC1=55;
-column_PC2=67;
+% column_PC1=55;
+% column_PC2=67;
 
 %% Concatenate EMG Trial Data
 % sampled at 2000 Hz, so need to cut data down by half (R = 2) to get at
@@ -48,12 +48,15 @@ switch tt
         load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
         data_PC1 = EMGDataPC1_1;
+%         column_PC1= size(EMGDataPC1_1,2)-3;
+        
     case(2)
         load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
         load([PC1,'\EMG_Trial',num2str(t),'_2']);
         EMGDataPC1_2 = EMGdata;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2];
+%         column_PC1= size(EMGDataPC1_1,2)-3;
     case(3)
         load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
@@ -62,6 +65,7 @@ switch tt
         load([PC1,'\EMG_Trial',num2str(t),'_3']);
         EMGDataPC1_3 = EMGdata;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3];
+%         column_PC1= size(EMGDataPC1_1,2)-3;
     case(4)
         load([PC1,'\EMG_Trial',num2str(t),'_1']);
         EMGDataPC1_1 = EMGdata;
@@ -71,6 +75,7 @@ switch tt
         EMGDataPC1_3 = EMGdata;
         load([PC1,'\EMG_Trial',num2str(t),'_4']);
         EMGDataPC1_4 = EMGdata;
+%         column_PC1= size(EMGDataPC1_1,2)-3;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4];
 end
 
@@ -105,7 +110,14 @@ switch tt
         EMGDataPC2_4 = EMGdata;
         data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4];
 end
-
+load([PC1,'\EMG_Trial',num2str(t),'_1']);
+Channels1=Channels;
+Fs1=Fs;
+column_PC1= size(EMGDataPC1_1,2)-3;
+load([PC2,'\EMG_Trial',num2str(t),'_1']);
+Channels2=Channels;
+Fs2=Fs;
+column_PC2= size(EMGDataPC2_1,2)-3;
        
 aux1 = data_PC1;%- mean(EMGdata(:,end));
     aux1=aux1(1:R:end,:);
@@ -164,8 +176,10 @@ ylim([-0.25 0.2])
 ylabel('PC1 - PC2 (mV)')
 
 cd(PC1)
-load('Names.mat')
+% load('Names.mat')
 Data=data_PC1';
+Channels=Channels1;
+Fs=Fs1;
 if t<10
     save(['Trial0', num2str(t)],'Channels','Data','Fs')
 else
@@ -173,8 +187,11 @@ else
 end
 
 cd(PC2)
-load('Names.mat')
+
+% load('Names.mat')
 Data=data_PC2';
+Channels=Channels2;
+Fs=Fs2;
 if t<10
     save(['Trial0', num2str(t)],'Channels','Data','Fs')
 else
