@@ -1,17 +1,28 @@
 %Comparing Signals
-
+clc
 close all
 clear all
 
-subID = 'Pilot2';
+subID = 'AUF05\V03\'
 
-nexus=['Y:\Dulce\DataBase2\',subID,'\New Session'];
-PC1=['Y:\Dulce\DataBase2\',subID,'\PC1'];
-PC2=['Y:\Dulce\DataBase2\',subID,'\PC2'];
+nexus=['X:\Shuqi\NirsAutomaticityStudy\Data\',subID,'\Vicon'];
+PC1=['X:\Shuqi\NirsAutomaticityStudy\Data\',subID,'\PC1'];
+PC2=['X:\Shuqi\NirsAutomaticityStudy\Data\',subID,'\PC2'];
 
+ts = [1:6 8:15 17];
+tts = ones(1,length(ts));
+for i = [4 9]
+    tts(i) = 2;
+end
+%5 - OG, 6 - NIM, 8,9,10,11-TM
+
+%%
+for tIndex = 1:length(ts)
 cd(nexus)
-t=13;
-tt=2;
+% t=4; %trial number
+% tt=2; %# of mat files for this trial
+t =ts(tIndex);
+tt = tts(tIndex);
 R=2;
 ini=1;
 data_PC1=[];
@@ -19,8 +30,10 @@ data_PC2=[];
 forcedataall=[];
 if t<10
     H=btkReadAcquisition(['Trial0',num2str(t),'.c3d']);
+    disp(['Processing Trial 0' num2str(t)])
 else
     H=btkReadAcquisition(['Trial',num2str(t),'.c3d']);
+    disp(['Processing Trial ' num2str(t)])
 end
 [analogs,analogsInfo]=btkGetAnalogs(H);
 
@@ -105,7 +118,7 @@ for i=1:tt
     
     
     ini=ini+length(aux1);
-    figure()
+    figure('units','normalized','outerposition',[0 0 0.5 0.5])
     % subplot(2,1,1)
     plot(aux1(:,column_PC1)-mean(aux1(:,column_PC1)))
     hold on
@@ -128,12 +141,13 @@ for i=1:tt
     forcedataall=[forcedataall;forcedata];
 end
 %%
-figure()
+figure('units','normalized','outerposition',[0 0 0.5 0.5])
 plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
 hold on
 plot(forcedataall)
+title(['Trial0',num2str(t)])
 
-figure()
+figure('units','normalized','outerposition',[0 0 0.5 0.5])
 plot(analogs.Raw_Pin_3-mean(analogs.Raw_Pin_3))
 hold on
 plot(data_PC1(:,column_PC1)- mean(data_PC1(:,column_PC1)))
@@ -141,11 +155,14 @@ hold on
 plot(data_PC2(:,column_PC2)- mean(data_PC2(:,column_PC2)))
 legend('Force','PC1','PC2')
 % legend('Force','PC1')
+title(['Trial0',num2str(t)])
 
-figure()
+figure('units','normalized','outerposition',[0 0 0.5 0.5])
 plot(data_PC1(:,column_PC1)- mean(data_PC1(:,column_PC1))-(data_PC2(:,column_PC2)- mean(data_PC2(:,column_PC2))))
 ylim([-0.25 0.2])
 ylabel('PC1 - PC2 (mV)')
+title(['Trial0',num2str(t)])
+
 
 cd(PC1)
 % load('Names.mat')
@@ -169,3 +186,4 @@ else
     save(['Trial', num2str(t)],'Channels','Data','Fs')
 end
 cd(PC2)
+end
