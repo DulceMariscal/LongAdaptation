@@ -1,10 +1,24 @@
-%cvs2mat EMG data 
+%cvs2mat EMG data (Create the EMG mat files from the csv files)
 
-dir1='Y:\Dulce\R01_Nimbus2021\NTR_02Session2\PC1';
-dir2='Y:\Dulce\R01_Nimbus2021\NTR_02Session2\PC2';
-trials= [4:11,13:20,22:25];
-
-Getting_EMGdata_Csv2mat_PC1(dir1, trials)
-Getting_EMGdata_Csv2mat_PC2(dir2, trials)
+clc
+close all
+clear all
 
 
+dirNexus='Y:\Marcela\Perception Studies\Weber Perception\Data\WP01\Session 1';
+dir1='Y:\Marcela\Perception Studies\Weber Perception\Data\WP01\Session 1\EMG';
+
+% Leave empty if you only use one computer
+dir2=[];
+
+trials= [6:12];
+
+% Generate the empty mat files from the
+Getting_EMGdata_Csv2mat(dir1, trials)
+
+if ~isempty(dir2)
+    Getting_EMGdata_Csv2mat(dir2, trials)    
+end
+
+
+% Syncronize 
