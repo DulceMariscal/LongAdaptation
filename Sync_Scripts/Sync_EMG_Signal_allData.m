@@ -1,20 +1,24 @@
-%Comparing Signals
-clc
-close all
-clear all
+function Sync_EMG_Signal_allData(nexus, PC1, PC2, ts)
 
-% Define the required variables
-subID = 'WP01';
+%% These were things that needed to be defined or manually changed before this code was turned into a function
 
-nexus=['Y:\Marcela\Perception Studies\Weber Perception\Data\',subID,'\Session 1'];
-PC1=['Y:\Marcela\Perception Studies\Weber Perception\Data\',subID,'\Session 1\EMG'];
+% %Comparing Signals
+% clc
+% close all
+% clear all
+% 
+% % Define the required variables
+% subID = 'WP01';
+% 
+% nexus=['Y:\Marcela\Perception Studies\Weber Perception\Data\',subID,'\Session 1'];
+% PC1=['Y:\Marcela\Perception Studies\Weber Perception\Data\',subID,'\Session 1\EMG'];
+% 
+% % Leave empty if you only use one computer
+% PC2=[];
+% 
+% ts = [6 7 8 9 10 11 12];
 
-% Leave empty if you only use one computer
-PC2=[];
-
-ts = [6 7 8 9 10 11 12];
-
-% Determine how many files per trial are there in the PC folders
+%% Determine how many files per trial are there in the PC folders
 
 tts=[];
 for i=ts
