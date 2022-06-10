@@ -8,12 +8,12 @@
 %-- trial: this should be an array of the trials numbers to process
 clc;
 
-subjectDir = 'X:\Shuqi\NirsAutomaticityStudy\Data\AUF10\V04\' %change this to match your directory
-allfiles = dir([subjectDir 'Vicon' filesep]);
+subjectDir = 'Z:\Shared\Dulce\EMG_Generalization\PATR06\' %change this to match your directory
+allfiles = dir([subjectDir 'New Session' filesep]);
 %e.g.: vicon file folder: X:\Shuqi\NirsAutomaticityStudy\Data\AUF09\V03\Vicon
 viconFileNames = {allfiles(:).name};
 diffs = [];
-for PC = 1:2
+for PC =1:2
     emgDir = [subjectDir 'PC' num2str(PC) filesep]
     %e.g.: X:\Shuqi\NirsAutomaticityStudy\Data\AUF09\V03\PC2
     cd(emgDir);
@@ -21,7 +21,7 @@ for PC = 1:2
     pc1files = struct2cell(pc1filesRaw);
     pc1fileDates = datetime(pc1files(3,:));
 
-    for trial = 8:21 %change this to match your trial number
+    for trial =[1:4 8:16] %change this to match your trial number
         x1dFileName = sprintf('Trial%02d.x1d',trial);
         [~,idx] = ismember(x1dFileName,viconFileNames);
         x1dFileDate = allfiles(idx).date;
