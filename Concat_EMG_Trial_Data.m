@@ -10,18 +10,18 @@ clear all;
 clc
 
 % update subject ID
-subID = 'AUF05\V03'; 
+subID = 'PATR06'; 
 
 % Assign locations of data
-nexus=['X:\Shuqi\NirsAutomaticityStudy\Data\',subID,'\Vicon'];
-PC1=['X:\Shuqi\NirsAutomaticityStudy\Data\',subID,'\PC1'];
-PC2=['X:\Shuqi\NirsAutomaticityStudy\Data\',subID,'\PC2'];
+nexus=['Z:\Shared\Dulce\EMG_Generalization\',subID,'\New Session'];
+PC1=['Z:\Shared\Dulce\EMG_Generalization\',subID,'\PC1'];
+PC2=['Z:\Shared\Dulce\EMG_Generalization\',subID,'\PC2'];
 
 cd(nexus)
 %% Data info
 % update t and tt
-t=8;
-tt=1;
+t=13;
+tt=2;
 R=2;
 ini=1;
 data_PC1=[];
@@ -77,6 +77,19 @@ switch tt
         EMGDataPC1_4 = EMGdata;
 %         column_PC1= size(EMGDataPC1_1,2)-3;
         data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4];
+    case(5)
+        load([PC1,'\EMG_Trial',num2str(t,'%02d'),'_1']);
+        EMGDataPC1_1 = EMGdata;
+        load([PC1,'\EMG_Trial',num2str(t,'%02d'),'_2']);
+        EMGDataPC1_2 = EMGdata;
+        load([PC1,'\EMG_Trial',num2str(t,'%02d'),'_3']);
+        EMGDataPC1_3 = EMGdata;
+        load([PC1,'\EMG_Trial',num2str(t,'%02d'),'_4']);
+        EMGDataPC1_4 = EMGdata;
+        load([PC1,'\EMG_Trial',num2str(t,'%02d'),'_5']);
+        EMGDataPC1_5 = EMGdata;
+        %         column_PC1= size(EMGDataPC1_1,2)-3;
+        data_PC1 = [EMGDataPC1_1;EMGDataPC1_2;EMGDataPC1_3;EMGDataPC1_4;EMGDataPC1_5];
 end
 
 %% PC2
@@ -109,6 +122,18 @@ switch tt
         load([PC2,'\EMG_Trial',num2str(t,'%02d'),'_4']);
         EMGDataPC2_4 = EMGdata;
         data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4];
+    case(5)
+        load([PC2,'\EMG_Trial',num2str(t,'%02d'),'_1']);
+        EMGDataPC2_1 = EMGdata;
+        load([PC2,'\EMG_Trial',num2str(t,'%02d'),'_2']);
+        EMGDataPC2_2 = EMGdata;
+        load([PC2,'\EMG_Trial',num2str(t,'%02d'),'_3']);
+        EMGDataPC2_3 = EMGdata;
+        load([PC2,'\EMG_Trial',num2str(t,'%02d'),'_4']);
+        EMGDataPC2_4 = EMGdata;
+        load([PC2,'\EMG_Trial',num2str(t,'%02d'),'_5']);
+        EMGDataPC2_5 = EMGdata;
+        data_PC2 = [EMGDataPC2_1;EMGDataPC2_2;EMGDataPC2_3;EMGDataPC2_4;EMGDataPC2_5];
 end
 load([PC1,'\EMG_Trial',num2str(t,'%02d'),'_1']);
 Channels1=Channels;
